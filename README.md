@@ -4,7 +4,7 @@
 
 > **友邦三宝** = 讲行业（为什么做保险）+ 讲公司（为什么选友邦）+ 讲个人（我是谁、凭什么被记住）。
 
-助手会主动推进整个流程，你只需回答问题、逐段确认，无需记忆任何指令。
+助手会主动推进整个流程，你只需回答问题、逐段确认，无需记忆任何指令。最终文稿会**写入你的 Obsidian 个人知识库**，成为可长期复用、链接、迭代的活文档。
 
 ---
 
@@ -20,32 +20,44 @@
 
 ---
 
-## 安装
+## ⭐ 使用前准备：个人知识库（Obsidian）
 
-这是一个 **Claude Code project skill**。两种用法：
+本 Skill 采用**强 Vault 模式**：必须在 Obsidian Vault 里运行，最终文稿写入你的个人知识库，而不是散落在某个项目文件夹。
 
-### 方式一：在本仓库目录里直接用（最简单）
+使用前请完成：
+
+1. 在 Obsidian 中创建或打开一个 Vault（例如「我的第二大脑」）。
+2. 在 Vault 根目录下确保存在 `00_个人背景/` 目录（与生财「第二大脑」内容创作系统结构一致；若你已用那套结构则无需改动）。
+
+   推荐最小结构：
+   ```
+   <你的 Vault>/
+   └── 00_个人背景/        ← 三宝文件写到这里
+   ```
+3. 用 Claude Code 打开**这个 Vault 目录**。
+
+如果检测不到 Vault 或 `00_个人背景/`，Skill 会暂停并提示你缺什么，不会继续访谈、也不会乱建目录。
+
+---
+
+## 安装：把 Skill 装进你的 Vault
+
+clone 本仓库后，把 Skill 目录放进你的 Obsidian Vault 的 `.claude/skills/` 下：
 
 ```bash
-git clone https://github.com/<你的用户名>/aia-three-treasures.git
-cd aia-three-treasures
+git clone https://github.com/zzhmzj1226/aia-three-treasures.git
+cp -r aia-three-treasures/.claude/skills/aia-three-treasures "<你的Vault路径>/.claude/skills/"
 ```
 
-然后在 Claude Code 里打开这个目录，对它说「帮我设计我的友邦三宝」即可触发。
+然后用 Claude Code 打开你的 Vault 目录，对它说「帮我设计我的友邦三宝」即可触发。
 
-### 方式二：复制到你自己的项目
-
-把 `.claude/skills/aia-three-treasures/` 整个目录复制到你任意项目的 `.claude/skills/` 下：
-
-```bash
-cp -r .claude/skills/aia-three-treasures /path/to/your-project/.claude/skills/
-```
+> 为什么不能在仓库目录里直接用？因为本 Skill 启动时会检测 Obsidian Vault（`.obsidian/` 目录），仓库本身不是 Vault，直接用会触发暂停。Vault 是你的个人知识库，Skill 要在里面读写你的笔记。
 
 ---
 
 ## 使用
 
-在你的项目目录下，对 Claude Code 说任意一句即可自动触发：
+在你的 Vault 目录下（用 Claude Code 打开），说任意一句即可自动触发：
 
 - 「帮我设计我的友邦三宝」
 - 「我想梳理一下三宝自我介绍」
@@ -59,7 +71,7 @@ cp -r .claude/skills/aia-three-treasures /path/to/your-project/.claude/skills/
 3. **讲个人** —— 过往经历、个人特质、可被记住的链接点
 4. **成稿** —— 完整版 + 面谈/朋友圈/社群/一句话电梯版 + 个人标签卡
 
-全部确认后，助手会在项目目录自动生成 `友邦三宝_v1.md`。后续迭代只需说「帮我优化三宝的讲个人部分」，会按 v1.1 / v1.2 递增更新、保留历史。
+全部确认后，助手会自动写入 `<你的 Vault>/00_个人背景/友邦三宝_v1.md`。后续迭代只需说「帮我优化三宝的讲个人部分」，会按 v1.1 / v1.2 递增更新、保留历史。
 
 ---
 
@@ -67,13 +79,14 @@ cp -r .claude/skills/aia-three-treasures /path/to/your-project/.claude/skills/
 
 ```
 .claude/skills/aia-three-treasures/
-├── SKILL.md                              # 主流程：启动、对话规则、四阶段、自动写入
-├── README.md                             # 本文件的同款说明
+├── SKILL.md                              # 主流程：启动、对话规则、四阶段、自动写入个人知识库
+├── README.md                             # 同款说明
 └── references/
     ├── interview-guide.md                # 三阶段可选问题、追问方法、信息充足标准
     ├── company-profile.md                # 友邦公司素材库（含团队资料预留区）
     ├── storytelling-guide.md             # 三宝写作指南：叙事逻辑、链接点、验收标准
-    └── output-templates.md               # 友邦三宝_v1.md 的固定结构与更新规则
+    ├── output-templates.md               # 00_个人背景/友邦三宝_v1.md 的固定结构与更新规则
+    └── knowledge-base.md                 # 个人知识库（Obsidian）集成：Vault 准备、检测、写入路径
 ```
 
 ---
@@ -94,7 +107,7 @@ cp -r .claude/skills/aia-three-treasures /path/to/your-project/.claude/skills/
 
 ## 隐私说明
 
-本仓库**只发布 Skill 本身**，不含任何代理人的个人素材。运行 Skill 后在本地生成的 `友邦三宝_v1.md`（你的个人素材库）默认被 `.gitignore` 忽略，不会被上传。
+本仓库**只发布 Skill 本身**，不含任何代理人的个人素材。运行 Skill 后写入的是**你自己的 Obsidian Vault** 里的 `00_个人背景/友邦三宝_v1.md`，存在你本地、属于你，不进本仓库、也不上传任何地方。
 
 ## 许可
 
