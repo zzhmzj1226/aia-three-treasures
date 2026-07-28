@@ -1,0 +1,13 @@
+# 个人素材库（含真实隐私，不入库；运行 Skill 后由助手在本地生成）
+友邦三宝_v1.md
+
+# Claude Code 本地权限配置（每台机器不同，不入库）
+.claude/settings.local.json
+
+# macOS
+.DS_Store
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
