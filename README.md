@@ -8,6 +8,24 @@
 
 ---
 
+## 🚀 快速开始（一句话安装）
+
+在你的 **Obsidian Vault 根目录**里（需含 `00_个人背景/` 文件夹），把下面这句丢给你的 Claude Code：
+
+```
+从 github.com/zzhmzj1226/aia-three-treasures 把 skill 装进当前 Vault 的 .claude/skills/，然后带我走一遍「友邦三宝」，结果写入 00_个人背景/友邦三宝_v1.md。
+```
+
+或用一行命令安装：
+
+```bash
+git clone https://github.com/zzhmzj1226/aia-three-treasures.git /tmp/aia-3b && mkdir -p .claude/skills && cp -R /tmp/aia-3b/.claude/skills/aia-three-treasures .claude/skills/ && rm -rf /tmp/aia-3b && echo "✓ 装好了，对 Claude 说『帮我设计友邦三宝』"
+```
+
+> 没装过 Obsidian / 没有 `00_个人背景/`？先看下方「⭐ 使用前准备」。
+
+---
+
 ## 它解决什么问题
 
 很多代理人写三宝时容易陷入三个坑：
